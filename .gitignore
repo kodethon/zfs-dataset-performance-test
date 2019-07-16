@@ -1,0 +1,4 @@
+measurements/*.txt
+measurements/*.pdf
+measurements/old
+measurements/.ipynb_checkpoints
