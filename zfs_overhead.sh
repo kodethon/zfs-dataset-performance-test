@@ -4,10 +4,10 @@
 
 dataset_steps=$(seq 0 500 10000)
 num_datasets_to_measure=20
-cwd=$(pwd)
+root_dir=$(pwd)
 num_drives=2
 drive_size=2G
-eval drives=($(seq -f "\"${cwd}/%g.img\"" 1 ${num_drives}))
+eval drives=($(seq -f "\"${root_dir}/%g.img\"" 1 ${num_drives}))
 pid=$$
 #current_date_time=$(date "+%Y-%m-%d_%H:%M:%S")
 #outfile="measurements/measurements_${current_date_time}.txt"
@@ -107,8 +107,8 @@ done
 # create storage pool
 pool_name=test_pool
 mount_dir=test_mount
-mkdir "${cwd}/${mount_dir}/"
-zpool create -m "${cwd}/${mount_dir}/" ${pool_name} "${drives[@]}"
+mkdir "${root_dir}/${mount_dir}/"
+zpool create -m "${root_dir}/${mount_dir}/" ${pool_name} "${drives[@]}"
 
 # create outfile
 create_outfile
@@ -130,4 +130,4 @@ for d in "${drives[@]}"; do
   rm "$d"
 done
 
-rmdir "${cwd}/${mount_dir}"
+rmdir "${root_dir}/${mount_dir}"
